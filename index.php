@@ -1,4 +1,5 @@
 <?php
+require_once 'bootstrap.inc';
 /**
  * @filesource
  * Home page to PHPHelper.
