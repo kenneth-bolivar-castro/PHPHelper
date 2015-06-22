@@ -20,5 +20,8 @@ and open the template in the editor.
   <body>
     <h1>PHPHelper Project</h1>
     <div>Classes and functions helpers to develop on PHP projects.</div>
+    <ul>
+      <li><a href="send-mails.php">Send Emails</a></li>
+    </ul>
   </body>
 </html>
