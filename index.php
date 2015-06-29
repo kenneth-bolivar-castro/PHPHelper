@@ -21,5 +21,8 @@ and open the template in the editor.
     <h1>PHPHelper Project</h1>
     <div>Classes and functions helpers to develop on PHP projects.</div>
     <?php include_once 'views/list.php'; ?>
+    <hr/>
+    <?php $random = rand(65, 122) ?>
+    <p>Random value: <strong><?php echo $random ?> ( Char: <?php echo chr($random) ?> )</strong></p>
   </body>
 </html>
