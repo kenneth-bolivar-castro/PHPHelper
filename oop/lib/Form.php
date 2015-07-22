@@ -3,14 +3,14 @@
 require_once __DIR__ . '/Validator.php';
 
 class Form {
-  
+
   public $settings;
   public $form_number = 1;
-  
+
   public function __construct($settings) {
     $this->settings = $settings;
   }
-  
+
   /**
    * Builds a form from an array.
    */
@@ -19,14 +19,14 @@ class Form {
 
     // For multiple forms, create a counter.
     $this->form_number++;
-    
+
     // Check for submitted form and validate
     if (isset($_POST['action']) && $_POST['action'] == 'submit_' . $this->form_number) {
       if ($this->validate()) {
         $this->submit();
       }
     }
-    
+
     // Loop through each form element and render it.
     foreach ($this->settings as $name => $settings) {
       $label = '<label>' . $settings['title'] . '</label>';
@@ -44,18 +44,18 @@ class Form {
       }
       $output .= $label . '<p>' . $input . '</p>';
     }
-    
+
     // Wrap a form around the inputs.
     $output = '
       <form action="' . $_SERVER['PHP_SELF'] . '" method="post">
         <input type="hidden" name="action" value="submit_' . $this->form_number . '" />
         ' . $output . '
       </form>';
-    
+
     // Return the form.
     return $output;
   }
-  
+
   /**
    * Validates the form based on the 'validations' attribute in the form array.
    */
@@ -65,13 +65,13 @@ class Form {
       if (isset($settings['validations'])) {
         foreach ($settings['validations'] as $validation) {
           switch ($validation) {
-            
+
             case 'not_empty':
               if (!Validator::notEmpty($value)) {
                 return false;
               }
               break;
-            
+
             case 'is_valid_email':
               if (!Validator::isValidEmail($value)) {
                 return false;
@@ -83,7 +83,7 @@ class Form {
     }
     return true;
   }
-  
+
   /**
    * Once validated, this processes the form.
    */
@@ -96,4 +96,5 @@ class Form {
     $output = '<p>You submitted the following:</p><ul>' . $output . '</ul><br />';
     print $output;
   }
+
 }
